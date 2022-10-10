@@ -11,10 +11,12 @@
     </div>
     <span><slot name="test"></slot></span>
   </div>
+  <ModalComponent></ModalComponent>
 </template>
 
 <script>
 import ProductCard from "./ProductCard.vue";
+import ModalComponent from "../Portals/ModalComponent.vue";
 export default {
   methods: {
     handleSelectProduct(data) {
@@ -45,6 +47,7 @@ export default {
   },
   components: {
     ProductCard,
+    ModalComponent,
   },
 };
 </script>
