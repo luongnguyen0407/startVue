@@ -12,7 +12,6 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -58,17 +57,42 @@
         </button>
       </form>
       <div class="ml-2">
-        <button class="btn btn-danger btn_cart">
+        <button class="btn btn-danger btn_cart" @click="handleOpenModal">
           <i class="fa fa-shopping-cart"></i>
-          <div class="badge badge-light ml-2">1</div>
+          <div class="badge badge-light ml-2">{{ totalProduct.length }}</div>
         </button>
       </div>
     </div>
   </nav>
+  <Teleport to="#app">
+    <AppModal :isOpen="isOpen" :handleCloseModal="handleCloseModal">
+      <CartListTable />
+    </AppModal>
+  </Teleport>
 </template>
 
 <script>
-export default {};
+import CartListTable from "./CartListTable.vue";
+export default {
+  inject: ["productCart"],
+  data() {
+    return {
+      isOpen: false,
+      totalProduct: this.productCart,
+    };
+  },
+  methods: {
+    handleOpenModal() {
+      this.isOpen = true;
+    },
+    handleCloseModal() {
+      this.isOpen = false;
+    },
+  },
+  components: {
+    CartListTable,
+  },
+};
 </script>
 
 <style scoped></style>
